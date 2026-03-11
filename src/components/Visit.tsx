@@ -11,6 +11,9 @@ const Visit = () => {
   const addressLine3 = "Petaling Jaya, Selangor";
   const fullAddress = `${addressLine1}, ${addressLine2}, ${addressLine3}`;
 
+  const phoneDisplay = "014-291 6921";
+  const phoneHref = "tel:+60142916921";
+
   const mapsQuery = encodeURIComponent(fullAddress);
   const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
@@ -86,7 +89,7 @@ const Visit = () => {
                       Get in Touch
                     </p>
                     <p className="font-body text-base md:text-[17px] font-light text-espresso/80 leading-relaxed">
-                      Walk-ins welcome · Cake orders via Instagram
+                      Walk-ins welcome · Call for enquiries and cake orders
                     </p>
                   </div>
                 </div>
@@ -95,12 +98,12 @@ const Visit = () => {
 
             <div className="mt-10 flex flex-wrap items-center gap-4 md:gap-6">
               <a
-                href="https://www.instagram.com/labelle_bakehouse/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center font-body text-xs tracking-[0.25em] uppercase text-espresso bg-butter hover:bg-butter/90 px-7 py-3.5 transition-colors duration-300"
+                href={phoneHref}
+                className="inline-flex items-center justify-center gap-2 font-body text-xs tracking-[0.25em] uppercase text-espresso bg-butter hover:bg-butter/90 px-7 py-3.5 transition-colors duration-300"
+                aria-label={`Call ${phoneDisplay}`}
               >
-                Instagram
+                <Phone className="w-4 h-4" />
+                Call {phoneDisplay}
               </a>
 
               <a
@@ -114,7 +117,7 @@ const Visit = () => {
               </a>
             </div>
           </motion.div>
-
+          
           {/* Right Map */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
@@ -122,7 +125,7 @@ const Visit = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative min-h-[520px] lg:min-h-[680px]"
           >
-            <div className="h-full w-full overflow-hidden border border-espresso/10 bg-white shadow-[0_20px_60px_rgba(60,35,20,0.12)]">
+            <div className="h-full w-full overflow-hidden rounded-[1.25rem] lg:rounded-[1.5rem] border border-espresso/10 bg-white shadow-[0_20px_60px_rgba(60,35,20,0.12)]">
               <iframe
                 src="https://www.google.com/maps?q=Labelle+Bakehouse+PJ+New+Town&z=16&output=embed"
                 width="100%"
