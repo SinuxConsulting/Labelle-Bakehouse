@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/components/Footer";
+import Seo from "@/components/Seo";
 
 const categories = [
   { id: "signatures", label: "Signatures" },
@@ -86,6 +87,7 @@ const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState("signatures");
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const navRef = useRef<HTMLDivElement>(null);
+  const categoryButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const [navStuck, setNavStuck] = useState(false);
 
   useEffect(() => {
@@ -96,20 +98,43 @@ const MenuPage = () => {
     const handleScroll = () => {
       setNavStuck(window.scrollY > 340);
 
-      // determine active section
       const offsets = categories.map((c) => {
         const el = sectionRefs.current[c.id];
         if (!el) return { id: c.id, top: Infinity };
         return { id: c.id, top: el.getBoundingClientRect().top - 140 };
       });
-      const current = offsets.reduce((closest, item) =>
-        item.top <= 0 && item.top > closest.top ? item : closest,
+
+      const current = offsets.reduce(
+        (closest, item) =>
+          item.top <= 0 && item.top > closest.top ? item : closest,
         { id: categories[0].id, top: -Infinity }
       );
+
       if (current.id !== activeCategory) setActiveCategory(current.id);
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    const container = navRef.current;
+    const activeButton = categoryButtonRefs.current[activeCategory];
+
+    if (!container || !activeButton) return;
+
+    const containerWidth = container.offsetWidth;
+    const buttonLeft = activeButton.offsetLeft;
+    const buttonWidth = activeButton.offsetWidth;
+
+    const targetScrollLeft = buttonLeft - containerWidth / 2 + buttonWidth / 2;
+
+    container.scrollTo({
+      left: Math.max(0, targetScrollLeft),
+      behavior: "smooth",
+    });
   }, [activeCategory]);
 
   const scrollToSection = (id: string) => {
@@ -123,6 +148,12 @@ const MenuPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="Menu"
+        description="Explore the La Belle Bakehouse menu featuring artisan pastries, signature cakes, viennoiserie, savoury bakes, desserts, and specialty drinks."
+        path="/menu"
+      />
+
       {/* Menu Hero */}
       <section className="relative pt-12 pb-8 md:pt-16 md:pb-12 overflow-hidden">
         <div className="absolute inset-0">
@@ -178,7 +209,6 @@ const MenuPage = () => {
 
       {/* Sticky Category Nav */}
       <div
-        ref={navRef}
         className={`sticky top-0 z-40 transition-all duration-300 ${
           navStuck
             ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
@@ -186,12 +216,18 @@ const MenuPage = () => {
         }`}
       >
         <div className="content-max px-6 md:px-12 lg:px-20">
-          <nav className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-3 md:py-4 -mx-1">
+          <nav
+            ref={navRef}
+            className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-3 md:py-4 -mx-1 scroll-smooth"
+          >
             {categories.map((cat) => (
               <button
                 key={cat.id}
+                ref={(el) => {
+                  categoryButtonRefs.current[cat.id] = el;
+                }}
                 onClick={() => scrollToSection(cat.id)}
-                className={`flex-shrink-0 px-4 py-2 font-body text-xs tracking-[0.15em] uppercase rounded-full transition-all duration-300 ${
+                className={`flex-shrink-0 px-4 py-2 font-body text-xs tracking-[0.15em] uppercase rounded-full transition-all duration-300 whitespace-nowrap ${
                   activeCategory === cat.id
                     ? "bg-accent text-accent-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-secondary"
@@ -206,9 +242,11 @@ const MenuPage = () => {
 
       {/* Signatures Section */}
       <section
-        ref={(el) => { sectionRefs.current["signatures"] = el; }}
+        ref={(el) => {
+          sectionRefs.current["signatures"] = el;
+        }}
         id="signatures"
-        className="py-12 md:py-20"
+        className="py-12 md:py-20 scroll-mt-32"
       >
         <div className="content-max px-6 md:px-12 lg:px-20">
           <SectionHeader label="Must Try" title="Signatures" />
@@ -235,21 +273,25 @@ const MenuPage = () => {
       </div>
 
       {/* Category Sections */}
-      {categories.filter((c) => c.id !== "signatures").map((cat) => (
-        <section
-          key={cat.id}
-          ref={(el) => { sectionRefs.current[cat.id] = el; }}
-          id={cat.id}
-          className="py-12 md:py-20"
-        >
-          <div className="content-max px-6 md:px-12 lg:px-20">
-            <SectionHeader label={cat.label} title={cat.label} />
-            <div className="mt-8 md:mt-10">
-              <MenuList items={menuData[categoryToDataKey[cat.id]] || []} />
+      {categories
+        .filter((c) => c.id !== "signatures")
+        .map((cat) => (
+          <section
+            key={cat.id}
+            ref={(el) => {
+              sectionRefs.current[cat.id] = el;
+            }}
+            id={cat.id}
+            className="py-12 md:py-20 scroll-mt-32"
+          >
+            <div className="content-max px-6 md:px-12 lg:px-20">
+              <SectionHeader label={cat.label} title={cat.label} />
+              <div className="mt-8 md:mt-10">
+                <MenuList items={menuData[categoryToDataKey[cat.id]] || []} />
+              </div>
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        ))}
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-secondary/40">

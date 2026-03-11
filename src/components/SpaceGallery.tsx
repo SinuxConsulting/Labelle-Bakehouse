@@ -12,9 +12,9 @@ const images = [
 const SpaceGallery = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-
+  
   return (
-    <section id="space" className="section-padding bg-cream" ref={ref}>
+    <section id="space" className="section-padding bg-background" ref={ref}>
       <div className="content-max">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
