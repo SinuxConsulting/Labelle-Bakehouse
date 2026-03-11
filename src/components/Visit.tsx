@@ -1,94 +1,140 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { MapPin, Clock, Phone } from "lucide-react";
+import { MapPin, Clock, Phone, Navigation } from "lucide-react";
 
 const Visit = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
+  const addressLine1 = "No. 12, Jalan Tengah";
+  const addressLine2 = "PJ New Town, 46000";
+  const addressLine3 = "Petaling Jaya, Selangor";
+  const fullAddress = `${addressLine1}, ${addressLine2}, ${addressLine3}`;
+
+  const mapsQuery = encodeURIComponent(fullAddress);
+  const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
   return (
-    <section id="visit" className="section-padding bg-espresso" ref={ref}>
+    <section id="visit" className="section-padding bg-cream" ref={ref}>
       <div className="content-max">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
+          {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
+            className="flex flex-col justify-center"
           >
             <p className="font-body text-xs tracking-[0.35em] uppercase text-butter mb-4">
               Come Visit
             </p>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-primary-foreground leading-tight mb-10">
+
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-espresso leading-[1.05] mb-8">
               Find <em>us</em>
             </h2>
 
-            <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-butter flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-body text-sm font-medium text-primary-foreground mb-1">Address</p>
-                  <p className="font-body text-sm font-light text-primary-foreground/70 leading-relaxed">
-                    No. 12, Jalan Tengah,<br />
-                    PJ New Town, 46000<br />
-                    Petaling Jaya, Selangor
-                  </p>
+            <p className="max-w-xl font-body text-base md:text-lg font-light text-espresso/70 leading-relaxed mb-10">
+              Stop by Labelle Bakehouse for fresh bakes, coffee, and a warm space to unwind.
+              Whether you are dropping in for a quick takeaway or a slower afternoon, we would
+              love to have you.
+            </p>
+
+            <div className="space-y-5">
+              <div className="rounded-[2rem] border border-espresso/15 bg-white/45 shadow-[0_10px_30px_rgba(60,35,20,0.06)] backdrop-blur-sm p-6">
+                <div className="flex items-start gap-5">
+                  <div className="mt-0.5 flex h-12 w-12 items-center justify-center rounded-full bg-butter/15 border border-butter/35 shrink-0">
+                    <MapPin className="w-5 h-5 text-butter" />
+                  </div>
+                  <div>
+                    <p className="font-body text-sm font-semibold text-espresso mb-2">
+                      Address
+                    </p>
+                    <p className="font-body text-base md:text-[17px] font-light text-espresso/80 leading-relaxed">
+                      {addressLine1}
+                      <br />
+                      {addressLine2}
+                      <br />
+                      {addressLine3}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <Clock className="w-5 h-5 text-butter flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-body text-sm font-medium text-primary-foreground mb-1">Opening Hours</p>
-                  <p className="font-body text-sm font-light text-primary-foreground/70">
-                    Open daily · 8:00 am – 10:00 pm
-                  </p>
+              <div className="rounded-[2rem] border border-espresso/15 bg-white/45 shadow-[0_10px_30px_rgba(60,35,20,0.06)] backdrop-blur-sm p-6">
+                <div className="flex items-start gap-5">
+                  <div className="mt-0.5 flex h-12 w-12 items-center justify-center rounded-full bg-butter/15 border border-butter/35 shrink-0">
+                    <Clock className="w-5 h-5 text-butter" />
+                  </div>
+                  <div>
+                    <p className="font-body text-sm font-semibold text-espresso mb-2">
+                      Opening Hours
+                    </p>
+                    <p className="font-body text-base md:text-[17px] font-light text-espresso/80 leading-relaxed">
+                      Open daily · 8:00 am – 10:00 pm
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <Phone className="w-5 h-5 text-butter flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-body text-sm font-medium text-primary-foreground mb-1">Get in Touch</p>
-                  <p className="font-body text-sm font-light text-primary-foreground/70">
-                    Walk-ins welcome · Cake orders via Instagram
-                  </p>
+              <div className="rounded-[2rem] border border-espresso/15 bg-white/45 shadow-[0_10px_30px_rgba(60,35,20,0.06)] backdrop-blur-sm p-6">
+                <div className="flex items-start gap-5">
+                  <div className="mt-0.5 flex h-12 w-12 items-center justify-center rounded-full bg-butter/15 border border-butter/35 shrink-0">
+                    <Phone className="w-5 h-5 text-butter" />
+                  </div>
+                  <div>
+                    <p className="font-body text-sm font-semibold text-espresso mb-2">
+                      Get in Touch
+                    </p>
+                    <p className="font-body text-base md:text-[17px] font-light text-espresso/80 leading-relaxed">
+                      Walk-ins welcome · Cake orders via Instagram
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 flex items-center gap-6">
+            <div className="mt-10 flex flex-wrap items-center gap-4 md:gap-6">
               <a
                 href="https://www.instagram.com/labelle_bakehouse/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-body text-xs tracking-[0.25em] uppercase text-espresso bg-butter/90 hover:bg-butter px-6 py-3 transition-colors duration-300"
+                className="inline-flex items-center justify-center font-body text-xs tracking-[0.25em] uppercase text-espresso bg-butter hover:bg-butter/90 px-7 py-3.5 transition-colors duration-300"
               >
                 Instagram
               </a>
+
               <a
-                href="https://maps.google.com/?q=Labelle+Bakehouse+PJ+New+Town"
+                href={mapsSearchUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-body text-xs tracking-[0.25em] uppercase text-primary-foreground/60 hover:text-primary-foreground border-b border-primary-foreground/30 hover:border-primary-foreground/60 pb-0.5 transition-all duration-300"
+                className="inline-flex items-center gap-2 font-body text-xs tracking-[0.22em] uppercase text-espresso/70 hover:text-espresso border-b border-espresso/20 hover:border-espresso/50 pb-1 transition-all duration-300"
               >
+                <Navigation className="w-4 h-4" />
                 Get Directions
               </a>
             </div>
           </motion.div>
 
-          {/* Image */}
+          {/* Right Map */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="image-editorial aspect-[4/5]"
+            className="relative min-h-[520px] lg:min-h-[680px]"
           >
-            <img
-              src="/images/interior-3.jpg"
-              alt="Inside Labelle Bakehouse"
-              loading="lazy"
-            />
+            <div className="h-full w-full overflow-hidden border border-espresso/10 bg-white shadow-[0_20px_60px_rgba(60,35,20,0.12)]">
+              <iframe
+                src="https://www.google.com/maps?q=Labelle+Bakehouse+PJ+New+Town&z=16&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "520px" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Labelle Bakehouse location map"
+                className="h-full w-full"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
