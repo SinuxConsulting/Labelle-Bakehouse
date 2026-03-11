@@ -96,10 +96,10 @@ const Visit = () => {
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4 md:gap-6">
+            <div className="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-6">
   <a
     href={phoneHref}
-    className="inline-flex items-center gap-2 font-body text-xs tracking-[0.22em] uppercase text-espresso/70 hover:text-espresso border-b border-espresso/20 hover:border-espresso/50 pb-1 transition-all duration-300"
+    className="inline-flex items-center justify-center gap-2 font-body text-xs tracking-[0.22em] uppercase text-espresso/70 hover:text-espresso border-b border-espresso/20 hover:border-espresso/50 pb-1 transition-all duration-300"
     aria-label={`Call ${phoneDisplay}`}
   >
     <Phone className="w-4 h-4" />
@@ -110,7 +110,7 @@ const Visit = () => {
     href={mapsSearchUrl}
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 font-body text-xs tracking-[0.22em] uppercase text-espresso/70 hover:text-espresso border-b border-espresso/20 hover:border-espresso/50 pb-1 transition-all duration-300"
+    className="inline-flex items-center justify-center gap-2 font-body text-xs tracking-[0.22em] uppercase text-espresso/70 hover:text-espresso border-b border-espresso/20 hover:border-espresso/50 pb-1 transition-all duration-300"
   >
     <Navigation className="w-4 h-4" />
     Get Directions
