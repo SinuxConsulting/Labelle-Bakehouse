@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+@layer base {
+  :root {
+    /* Warm bakehouse palette derived from the actual space */
+    --background: 40 20% 97%;
+    --foreground: 30 10% 15%;
+
+    --card: 40 25% 95%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 40 20% 97%;
+    --popover-foreground: 30 10% 15%;
+
+    --primary: 30 45% 22%;
+    --primary-foreground: 40 30% 95%;
+
+    --secondary: 35 20% 90%;
+    --secondary-foreground: 30 15% 25%;
+
+    --muted: 35 15% 92%;
+    --muted-foreground: 30 8% 50%;
+
+    --accent: 25 55% 45%;
+    --accent-foreground: 40 30% 97%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 18% 88%;
+    --input: 35 18% 88%;
+    --ring: 30 45% 22%;
+
+    --radius: 0.25rem;
+
+    /* Custom brand tokens */
+    --cream: 40 35% 94%;
+    --butter: 38 60% 72%;
+    --cocoa: 20 35% 25%;
+    --espresso: 25 30% 18%;
+    --stone: 30 8% 55%;
+    --warm-white: 40 30% 98%;
+    --toast: 25 45% 38%;
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', system-ui, sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .text-display {
+    font-family: var(--font-display);
+  }
+
+  .text-body {
+    font-family: var(--font-body);
+  }
+
+  .section-padding {
+    @apply px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36;
+  }
+
+  .content-max {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .editorial-divider {
+    @apply w-16 h-px bg-accent mx-auto;
+  }
+
+  .image-editorial {
+    @apply overflow-hidden;
+  }
+
+  .image-editorial img {
+    @apply w-full h-full object-cover transition-transform duration-700 ease-out;
+  }
+
+  .image-editorial:hover img {
+    @apply scale-105;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
