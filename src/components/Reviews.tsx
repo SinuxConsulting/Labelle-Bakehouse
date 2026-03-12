@@ -73,7 +73,7 @@ const Reviews = () => {
   }, [api]);
 
   const googleReviewsUrl =
-    "https://www.google.com/search?q=Labelle+Bakehouse+Petaling+Jaya";
+    "https://www.reviewflow.my/#/r/labelle-bakehouse";
 
   const renderStars = (rating: number) =>
     Array.from({ length: 5 }, (_, i) => (
