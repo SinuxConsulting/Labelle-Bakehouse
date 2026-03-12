@@ -117,7 +117,6 @@ const Reviews = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-body text-xs tracking-[0.22em] uppercase text-cream bg-espresso hover:bg-espresso/90 px-6 py-3 transition-colors duration-300"
           >
-            Read More Reviews
             <ExternalLink className="h-4 w-4" />
           </a>
         </div>
